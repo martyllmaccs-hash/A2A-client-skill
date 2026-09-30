@@ -1,10 +1,19 @@
-# A2A Client Skill for Hermes
+# Hermes A2A client skill — 0.1
 
-A reusable Hermes Agent skill for safely discovering and calling peers through Hermes' built-in A2A client tools.
+One focused skill: [`SKILL.md`](SKILL.md). Uses Hermes' built-in A2A tools; no custom transport, runtime dependency, server deployment, or network changes.
 
-- **Install/use:** copy `SKILL.md` into a Hermes skills directory as a skill folder, then load `a2a-client-skill` when configuring or troubleshooting A2A calls.
-- **Scope:** caller-side discovery, authentication hygiene, bounded calls, task/result verification, and directional testing. Server deployment/network changes are explicitly out of scope.
-- **Security:** repository contains reusable instructions only. Keep credentials, `.env` files, machine-specific addresses, and private deployment data out of the repo.
-- **Provenance:** adapted from the MIT-licensed Hermes `hermes-vps-operations` skill's A2A runbook and local deployment observations; not an official Hermes/A2A publication. Verify commands against the installed Hermes version.
+## Install
 
-See [`SKILL.md`](SKILL.md) for the complete instructions.
+Copy `SKILL.md` into an `a2a-client-skill/` folder under the intended profile's skills directory. Start a new session and load `a2a-client-skill`. Keep the repository's test files outside the installed skill folder.
+
+## Changes in 0.1
+
+Configured-name bearer authentication; no duplicate discovery fetch; explicit completion/pending-task handling; bounded retries; independent remote-write verification. History/list are not task-polling tools. Trusted-endpoint requirements are guidance, not a hardened transport implementation.
+
+## Checks
+
+Run `python3 -m unittest discover -s tests -v` (standard library only). These are offline package/manifest regression checks—not live A2A integration tests or performance benchmarks. Commands and tool semantics were checked against [Hermes docs](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/a2a) and the inspected Hermes implementation; recheck installed schemas when versions differ.
+
+## Attribution
+
+Refined from the MIT-licensed Hermes Agent A2A operational guidance. Martin and Hermes Agent maintain this standalone adaptation; it is not an official Hermes publication. Original license attribution is retained in [`LICENSE`](LICENSE). Never commit credentials or machine-private data.
